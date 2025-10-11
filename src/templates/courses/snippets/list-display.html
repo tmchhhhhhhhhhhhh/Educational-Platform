@@ -1,0 +1,13 @@
+<ul class="list-disc pl-5">
+    {% for object in queryset %}
+        <li class="mb-2">
+            {% if object.status == 'published' %}
+                <a class="text-blue-600 hover:text-blue-800 hover:underline" href="{{ object.get_absolute_url }}">
+                    {{ object.title }}
+                </a>
+            {% else %}
+                <span class="text-gray-500 font-semibold">{{ object.title }} (Coming Soon)</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
