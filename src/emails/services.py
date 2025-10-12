@@ -10,7 +10,7 @@ EMAIL_HOST_USER = settings.EMAIL_HOST_USER
 
 def verify_email(email):
     qs = Email.objects.filter(email=email, active=False)
-    return qs.exists
+    return qs.exists()
 
 
 def get_verification_email_msg(verification_instance, as_html=False):
@@ -58,7 +58,7 @@ def verify_token(token, max_attemps=5):
     if not qs.exists() and not qs.count == 1:
         return False, "Неверный токен", None
     has_email_expired = qs.filter(expired=True)
-    if has_email_expired.exists() or qs.expired_at < datetime.utcnow():
+    if has_email_expired.exists():
         return False, "Токен истёк, попробуйте снова.", None
     
     max_attemps_reached = qs.filter(attempts__gte=max_attemps)

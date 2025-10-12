@@ -1,10 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section class="max-w-4xl mx-auto py-12 px-4">
+  <!-- Заголовок урока -->
+  <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ object.title }}</h1>
 
-<h1>{{ object.title }}</h1>
-<p>{{ object.description }}</p>
+  <!-- Описание урока -->
+  {% if object.description %}
+    <p class="text-gray-600 mb-8 leading-relaxed">{{ object.description }}</p>
+  {% endif %}
 
-{% include 'courses/snippets/list-display.html' with queryset=lessons_queryset %}
+  <!-- Ссылки на ресурсы -->
+  <div class="flex flex-col gap-4">
+    {% if object.notebook_link %}
+      <a href="{{ object.notebook_link }}" target="_blank"
+         class="px-4 py-2 bg-gray-100 rounded-lg text-gray-800 hover:bg-gray-200 transition-colors">
+         Открыть ноутбук
+      </a>
+    {% endif %}
 
+    {% if object.test_link %}
+      <a href="{{ object.test_link }}" target="_blank"
+         class="px-4 py-2 bg-gray-100 rounded-lg text-gray-800 hover:bg-gray-200 transition-colors">
+         Пройти тест
+      </a>
+    {% endif %}
+  </div>
+
+  <!-- Требуется email -->
+  {% if object.requires_email %}
+    <p class="mt-6 text-sm text-gray-500">
+      Для доступа к этому уроку требуется войти через email.
+    </p>
+    <div id="hx-login" hx-get="/hx/login/" hx-trigger="load" hx-target="#hx-login" hx-swap="outerHTML"></div>
+  {% endif %}
+
+  <!-- Дата урока -->
+  <p class="mt-6 text-xs text-gray-400">
+    Добавлено: {{ object.timestamp|date:"d M Y" }}, обновлено: {{ object.updated|date:"d M Y" }}
+  </p>
+</section>
 {% endblock content %}

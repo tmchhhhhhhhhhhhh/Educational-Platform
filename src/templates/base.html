@@ -1,82 +1,130 @@
 {% load django_htmx %}
+{% load static %}
 
 <!doctype html>
-<html>
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% load static %}
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js" 
-      integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ" 
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js"
+      integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ"
       crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <title>{% block head_title %}{% endblock head_title %}</title>
+    <title>{% block head_title %}Educational Platform{% endblock %}</title>
+
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #fafafa;
+        color: #111;
+      }
+
+      .card {
+        @apply bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200;
+      }
+
+      .btn {
+        @apply bg-black text-white px-5 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-neutral-800;
+      }
+
+      .input {
+        @apply w-full border border-gray-300 rounded-xl px-4 py-2 text-sm focus:ring-2 focus:ring-black focus:outline-none;
+      }
+
+      .fade-in {
+        animation: fade-in 0.3s ease-in-out;
+      }
+
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
   </head>
-  <body hx-header='{"X_CSRFToken": "{{csrf_token}}"}'>
 
-    <div id="hx-login" hx-get="/hx/login/" hx-trigger="load" hx-target="#hx-login" hx-swap="outerHTML"></div>
+  <body hx-header='{"X_CSRFToken": "{{csrf_token}}"}' class="min-h-screen flex flex-col">
 
-    {% block content %}
-    <br>
-    {% endblock content %}
+    <!-- Header -->
+    <header class="flex justify-between items-center px-8 py-4 border-b border-gray-200 bg-white">
+      <a href="/" class="text-xl font-semibold">Edu<span class="text-gray-500">Platform</span></a>
+      <nav class="flex gap-6 text-sm text-gray-600">
+        <a href="/" class="hover:text-black transition">Главная</a>
+        <a href="/courses/" class="hover:text-black transition">Курсы</a>
+      </nav>
+    </header>
 
-    <h1 class="text-3xl font-bold underline"></h1>
+    <!-- Контент -->
+    <main class="flex-grow px-6 py-10 fade-in">
+      <div id="hx-login" hx-get="/hx/login/" hx-trigger="load" hx-target="#hx-login" hx-swap="outerHTML"></div>
+      {% block content %}{% endblock %}
+    </main>
 
+    <!-- Footer -->
+    <footer class="text-center py-4 border-t border-gray-200 text-gray-500 text-sm">
+      © 2025 Educational Platform
+    </footer>
+
+    <!-- Сессия -->
 <script>
-function startSessionTimer() {
-    let sessionTimeout = {{ request.session.get_expiry_age|default:600 }} * 1000; // в мс
-    let warningTime = 60 * 1000; // за минуту предупреждаем
+document.addEventListener('DOMContentLoaded', () => {
+    {% if request.session.email_id %}
+        startSessionTimer();
+    {% endif %}
+});
 
-    // Таймер предупреждения
+function startSessionTimer() {
+    let sessionTimeout = {{ request.session.get_expiry_age|default:600 }} * 1000;
+    let warningTime = 60 * 1000;
+
     setTimeout(() => {
         const modal = document.createElement('div');
         modal.id = "session-modal";
         modal.innerHTML = `
-            <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;display:flex;align-items:center;justify-content:center;z-index:9999">
-                <div style="background:white;padding:20px;border-radius:8px;text-align:center;">
-                    <h3>Сессия скоро истечет</h3>
-                    <p>Продлить сессию?</p>
-                    <button id="extend-session">Продлить</button>
-                    <button id="logout-session">Выйти</button>
-                </div>
+          <div class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 fade-in">
+            <div class="bg-white rounded-2xl p-6 text-center w-80">
+              <h3 class="text-lg font-semibold mb-2">Сессия скоро истечет</h3>
+              <p class="text-gray-500 mb-4">Хотите продлить её?</p>
+              <div class="flex justify-center gap-3">
+                <button id="extend-session" class="btn">Продлить</button>
+                <button id="logout-session" class="btn bg-gray-300 text-black hover:bg-gray-400">Выйти</button>
+              </div>
             </div>
+          </div>
         `;
         document.body.appendChild(modal);
 
         document.getElementById('extend-session').onclick = () => {
-            fetch('/hx/extend-session/', {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.status === "ok") {
-                    console.log("🔁 Сессия продлена");
-                    document.getElementById('session-modal').remove();
-                    startSessionTimer(); // перезапускаем таймер
-                } else {
-                    alert("Сессия истекла!");
-                    window.location.href = '/';
-                }
-            });
+          fetch('/hx/extend-session/', {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}',
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === "ok") {
+              document.getElementById('session-modal').remove();
+              startSessionTimer();
+            } else {
+              alert("Сессия истекла!");
+              window.location.href = '/';
+            }
+          });
         };
 
         document.getElementById('logout-session').onclick = () => {
-            fetch('/hx/logout/', { method: 'POST', headers: { 'X-CSRFToken': '{{ csrf_token }}' } })
-                .then(() => window.location.href = '/');
+          fetch('/hx/logout/', { method: 'POST', headers: { 'X-CSRFToken': '{{ csrf_token }}' } })
+            .then(() => window.location.href = '/');
         };
 
     }, sessionTimeout - warningTime);
 }
-
-// Запуск
-document.addEventListener('DOMContentLoaded', startSessionTimer);
 </script>
+
 
   </body>
 </html>

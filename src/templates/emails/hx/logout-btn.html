@@ -1,4 +1,26 @@
-<form hx-post="{% url 'logout-hx' %}" hx-target="body" method="POST">
-    {% csrf_token %}
-    <button type="submit">Выход из сессии</button>
+<form 
+  hx-post="{% url 'logout-hx' %}" 
+  hx-target="body" 
+  method="POST" 
+  class="flex justify-center py-6 fade-in"
+>
+  {% csrf_token %}
+  <button 
+    type="submit"
+    class="px-6 py-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 hover:text-black transition-all"
+  >
+    Выйти из сессии
+  </button>
 </form>
+
+<style>
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s ease forwards;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>

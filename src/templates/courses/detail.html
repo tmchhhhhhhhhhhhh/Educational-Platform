@@ -2,11 +2,33 @@
 
 {% block content %}
 
-<h1>{{ object.title }}</h1>
-<p>{{ object.description }}</p>
+<div class="max-w-4xl mx-auto py-12 px-4">
+  <h1 class="text-4xl font-bold mb-4 text-gray-900">{{ object.title }}</h1>
+  <p class="text-gray-600 mb-8">{{ object.description }}</p>
 
-<h2>Уроки</h2>
+  <h2 class="text-2xl font-semibold mb-6 text-gray-900">Уроки</h2>
 
-{% include 'courses/snippets/list-display.html' with queryset=lessons_queryset %}
+  <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+    {% for lesson in lessons_queryset %}
+      {% if lesson.status == 'published' %}
+        <a href="{{ lesson.get_absolute_url }}" class="block bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden group">
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+              {{ lesson.title }}
+            </h3>
+            <p class="text-sm text-gray-500">{{ lesson.short_description|default:"Нет описания" }}</p>
+            <p class="text-xs text-gray-400 mt-1">{{ lesson.timestamp|date:"d M Y" }}</p>
+          </div>
+        </a>
+      {% else %}
+        <div class="bg-gray-100 rounded-2xl p-4 border border-gray-200 text-center">
+          <span class="block text-gray-400 font-medium italic">{{ lesson.title }} (В разработке...)</span>
+        </div>
+      {% endif %}
+    {% empty %}
+      <p class="text-gray-500 italic col-span-full">Уроков пока нет.</p>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock content %}

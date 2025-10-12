@@ -1,14 +1,65 @@
 {% extends 'base.html' %}
 
-{% block head_title %} Home {% endblock head_title %}
+{% block head_title %}Главная{% endblock head_title %}
 
-{% block content %} 
+{% block content %}
 
-<!-- 
-    <h1>Home Page</h1>    
--->
+<section class="max-w-4xl mx-auto text-center py-24 fade-in">
+  <h1 class="text-5xl font-bold mb-6 text-gray-900 tracking-tight">
+    Educational <span class="text-gray-500">Platform</span>
+  </h1>
+  <p class="text-gray-600 text-lg mb-10 leading-relaxed">
+    Современная платформа для обучения и работы с материалами. Минимализм, скорость и удобство.
+  </p>
 
+  <div class="flex justify-center gap-4">
+    <a href="/courses/" 
+       class="px-6 py-3 rounded-xl bg-black text-white hover:bg-gray-800 transition-all">
+       Материалы
+    </a>
+  </div>
+</section>
 
+<section class="max-w-5xl mx-auto grid md:grid-cols-3 gap-10 py-20 border-t border-gray-200">
+  <div class="card p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-left">
+    <h3 class="text-xl font-semibold mb-2 text-gray-900">📘 Курсы</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">
+      Получай доступ к актуальным материалам и новым темам обучения.
+    </p>
+  </div>
 
+  <div class="card p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-left">
+    <h3 class="text-xl font-semibold mb-2 text-gray-900">📚 Материалы</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">
+      Полезные материалы на любую тему бесплатно.
+    </p>
+  </div>
+
+  <div class="card p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-left">
+    <h3 class="text-xl font-semibold mb-2 text-gray-900">🧭 Удобство</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">
+      Минималистичный интерфейс без отвлечений — только важное.
+    </p>
+  </div>
+</section>
+
+<section class="text-center py-24 border-t border-gray-200">
+  <h2 class="text-2xl font-semibold mb-4 text-gray-900">Начни обучение сегодня</h2>
+  <p class="text-gray-600 mb-8">Войди через почту, чтобы получить доступ ко всем материалам.</p>
+  <div id="hx-login" hx-get="/hx/login/" hx-trigger="load" hx-target="#hx-login" hx-swap="outerHTML"></div>
+</section>
+
+<style>
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 
 {% endblock content %}
