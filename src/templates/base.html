@@ -16,7 +16,7 @@
   </head>
   <body hx-header='{"X_CSRFToken": "{{csrf_token}}"}'>
 
-    <div hx-get="/hx/login/" hx-trigger="load" hx-target="this"></div>
+    <div id="hx-login" hx-get="/hx/login/" hx-trigger="load" hx-target="#hx-login" hx-swap="outerHTML"></div>
 
     {% block content %}
     <br>

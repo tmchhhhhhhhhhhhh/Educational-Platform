@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 import datetime
 from django.utils import timezone
+from datetime import timedelta
 
 EMAIL_HOST_USER = settings.EMAIL_HOST_USER
 
@@ -24,10 +25,13 @@ def get_verification_email_msg(verification_instance, as_html=False):
 
 def start_verification_event(email):
     email_obj, created = Email.objects.get_or_create(email=email)
+    expiry = timezone.now() + timedelta(hours=1)
     obj = EmailVerification.objects.create(
         parent=email_obj,
         email=email,
+        expired_at=expiry,
     )
+    
     sent = send_verification_email(verify_obj=obj)
     return obj, sent
 
@@ -54,7 +58,7 @@ def verify_token(token, max_attemps=5):
     if not qs.exists() and not qs.count == 1:
         return False, "Неверный токен", None
     has_email_expired = qs.filter(expired=True)
-    if has_email_expired.exists():
+    if has_email_expired.exists() or qs.expired_at < datetime.utcnow():
         return False, "Токен истёк, попробуйте снова.", None
     
     max_attemps_reached = qs.filter(attempts__gte=max_attemps)
