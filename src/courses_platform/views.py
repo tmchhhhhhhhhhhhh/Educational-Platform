@@ -26,7 +26,7 @@ def home(request, *args, **kwargs):
 
         )
         context["form"] = EmailForm()
-        context["message"] = f"Success!, Check your email for verification for {1+1}"
+        context["message"] = f"Отлично! Проверьте доступ на вашей почте {email_val}"
     print('email_id', request.session.get('email_id'))
     return render(request, template_name, context)
 

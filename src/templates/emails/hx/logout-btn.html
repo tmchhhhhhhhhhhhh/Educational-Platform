@@ -1,4 +1,4 @@
 <form hx-post="{% url 'logout-hx' %}" hx-target="body" method="POST">
     {% csrf_token %}
-    <button type="submit">Logout</button>
+    <button type="submit">Выход из сессии</button>
 </form>
