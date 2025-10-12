@@ -10,6 +10,7 @@ from emails.views import (
     verify_email_token_view,
     email_token_login_view,
     logout_btn_hx_view,
+    extend_session_view,
 )
 
 urlpatterns = [
@@ -17,6 +18,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("hx/login/", email_token_login_view),
     path("hx/logout/", logout_btn_hx_view, name="logout-hx"),
+    path('hx/extend-session/', extend_session_view, name='extend-session'),
     path("verify/<uuid:token>/", verify_email_token_view),
     path("courses/", courses_views.course_list_view, name="course-list"),
     path(
@@ -29,6 +31,7 @@ urlpatterns = [
         courses_views.lesson_detail_view,
         name="lesson-detail",
     ),
+    
 ]
 
 if settings.DEBUG:

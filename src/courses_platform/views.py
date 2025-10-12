@@ -4,6 +4,9 @@ from emails.models import Email, EmailVerification
 from emails.forms import EmailForm
 from emails import services as email_services
 
+from django.utils import timezone
+from django.http import JsonResponse
+
 def home(request, *args, **kwargs):
     template_name = "home.html"
     print(request.POST)

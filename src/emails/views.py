@@ -1,11 +1,26 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from . import services
 from .forms import EmailForm
 from .models import Email, EmailVerification
 from django_htmx.http import HttpResponseClientRedirect
+from django_htmx.http import HttpResponseClientRedirect
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def extend_session_view(request):
+    """
+    Продлевает сессию для активного пользователя.
+    """
+    if request.session.get('email_id'):
+        request.session.modified = True
+        return JsonResponse({"status": "ok", "message": "Сессия продлена"})
+    return JsonResponse({"status": "expired", "message": "Сессия уже истекла"})
+
+
+
 # Create your views here.
 
 def logout_btn_hx_view(request):
@@ -55,10 +70,10 @@ def verify_email_token_view(request, token, *args, **kwargs):
         except:
             pass
         messages.error(request, msg)
-        return redirect("/login/")
+        return redirect("/")
     messages.success(request, msg)
     request.session['email_id']=f"{email_obj.id}"
     next_url = request.session.get('next_url') or '/'
     if not next_url.startswith('/'):
         next_url = "/"
-    return redirect("/login/")
+    return redirect("/courses/")

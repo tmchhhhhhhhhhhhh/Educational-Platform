@@ -8,10 +8,11 @@
     {% load static %}
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js" integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ" crossorigin="anonymous"></script>
-    <title>{% block head_title %}
-    
-    {% endblock head_title %}</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js" 
+      integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ" 
+      crossorigin="anonymous"></script>
+
+    <title>{% block head_title %}{% endblock head_title %}</title>
   </head>
   <body hx-header='{"X_CSRFToken": "{{csrf_token}}"}'>
 
@@ -20,8 +21,62 @@
     {% block content %}
     <br>
     {% endblock content %}
-    <h1 class="text-3xl font-bold underline">
-      
-    </h1>
+
+    <h1 class="text-3xl font-bold underline"></h1>
+
+<script>
+function startSessionTimer() {
+    let sessionTimeout = {{ request.session.get_expiry_age|default:600 }} * 1000; // в мс
+    let warningTime = 60 * 1000; // за минуту предупреждаем
+
+    // Таймер предупреждения
+    setTimeout(() => {
+        const modal = document.createElement('div');
+        modal.id = "session-modal";
+        modal.innerHTML = `
+            <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;display:flex;align-items:center;justify-content:center;z-index:9999">
+                <div style="background:white;padding:20px;border-radius:8px;text-align:center;">
+                    <h3>Сессия скоро истечет</h3>
+                    <p>Продлить сессию?</p>
+                    <button id="extend-session">Продлить</button>
+                    <button id="logout-session">Выйти</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        document.getElementById('extend-session').onclick = () => {
+            fetch('/hx/extend-session/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === "ok") {
+                    console.log("🔁 Сессия продлена");
+                    document.getElementById('session-modal').remove();
+                    startSessionTimer(); // перезапускаем таймер
+                } else {
+                    alert("Сессия истекла!");
+                    window.location.href = '/';
+                }
+            });
+        };
+
+        document.getElementById('logout-session').onclick = () => {
+            fetch('/hx/logout/', { method: 'POST', headers: { 'X-CSRFToken': '{{ csrf_token }}' } })
+                .then(() => window.location.href = '/');
+        };
+
+    }, sessionTimeout - warningTime);
+}
+
+// Запуск
+document.addEventListener('DOMContentLoaded', startSessionTimer);
+</script>
+
   </body>
 </html>
