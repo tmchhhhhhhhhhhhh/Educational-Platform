@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block head_title %}{{ notebook.title }} - Educational Platform{% endblock %}
+
+{% block content %}
+<div class="max-w-[1600px] mx-auto py-10 px-6 text-lg leading-relaxed">
+
+  <!-- Навигация назад -->
+  <div class="mb-8">
+    <a href="{% url 'lesson-detail' notebook.lesson.course.id notebook.lesson.id %}" 
+       class="text-blue-600 hover:text-blue-800 text-base">
+      ← Назад к уроку: {{ notebook.lesson.title }}
+    </a>
+  </div>
+
+  <!-- Заголовок -->
+  <div class="mb-8">
+    <h1 class="text-5xl font-bold text-gray-900 mb-3">{{ notebook.title }}</h1>
+    {% if notebook.description %}
+    <p class="text-gray-700 text-xl">{{ notebook.description }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Панель действий -->
+  <div class="flex flex-wrap gap-4 mb-10 p-5 bg-white rounded-2xl border border-gray-200">
+    {% if binder_url %}
+    <a href="{{ binder_url }}" target="_blank"
+       class="px-6 py-3 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition-colors font-medium flex items-center gap-2 text-lg">
+      <span>🚀</span> Запустить в Binder
+    </a>
+    {% endif %}
+    
+    <a href="{{ notebook.file.url }}" download
+       class="px-6 py-3 bg-gray-700 text-white rounded-xl hover:bg-gray-800 transition-colors font-medium flex items-center gap-2 text-lg">
+      <span>📥</span> Скачать .ipynb
+    </a>
+    
+    {% if not binder_url %}
+    <div class="text-base text-gray-500 py-2">
+      💡 Для интерактивного запуска настройте GitHub репозиторий
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Превью ноутбука -->
+  <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden w-full">
+    {% if error %}
+    <div class="p-10 text-center">
+      <div class="text-red-600 mb-3 text-xl">⚠️ Ошибка загрузки</div>
+      <p class="text-gray-600 text-lg">{{ error }}</p>
+    </div>
+    {% elif notebook_html %}
+
+    <style>
+      /* Расширенное и аккуратное превью */
+      .notebook-preview {
+        padding: 2rem 3rem;
+        background: white;
+        width: 100%;
+        max-width: none !important;
+        font-size: 1.125rem;
+        line-height: 1.8;
+      }
+      .notebook-preview .cell {
+        margin-bottom: 1.5rem;
+      }
+      .notebook-preview .input_area {
+        background: #f7f7f7;
+        padding: 1.25rem 1.5rem;
+        border-radius: 10px;
+        border-left: 5px solid #4a90e2;
+        margin-bottom: 0.75rem;
+      }
+      .notebook-preview .output_area {
+        padding: 1.25rem 1.5rem;
+        background: #fafafa;
+        border-radius: 10px;
+        border-left: 5px solid #50c878;
+      }
+      .notebook-preview pre {
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 1rem;
+        overflow-x: auto;
+      }
+      .notebook-preview table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+      }
+      .notebook-preview img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+
+    <div class="notebook-preview">
+      {{ notebook_html|safe }}
+    </div>
+
+    {% else %}
+    <div class="p-10 text-center text-gray-500 text-lg">
+      <p>Превью недоступно. Пожалуйста, скачайте файл или откройте в Binder/Colab.</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Информация о ноутбуке -->
+  <div class="mt-8 p-6 bg-blue-50 rounded-xl text-base text-gray-700">
+    <p class="mb-3"><strong>💡 Совет:</strong> Для полной интерактивности используйте кнопки "Запустить".</p>
+    {% if notebook.github_repo %}
+    <p class="mb-2"><strong>GitHub:</strong> 
+      <a href="https://github.com/{{ notebook.github_repo }}" target="_blank" class="text-blue-600 hover:underline">{{ notebook.github_repo }}</a>
+    </p>
+    {% endif %}
+    <p class="mt-2 text-sm text-gray-500">Создано: {{ notebook.created_at|date:"d M Y, H:i" }}</p>
+  </div>
+
+</div>
+{% endblock %}

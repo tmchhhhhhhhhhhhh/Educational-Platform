@@ -10,12 +10,52 @@
     <p class="text-gray-600 mb-8 leading-relaxed">{{ object.description }}</p>
   {% endif %}
 
-  <!-- Ссылки на ресурсы -->
-  <div class="flex flex-col gap-4">
+  <!-- JUPYTER NOTEBOOKS СЕКЦИЯ -->
+  {% if notebooks.exists %}
+  <div class="mb-8">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">📓 Jupyter Notebooks</h2>
+    <div class="grid gap-4">
+      {% for notebook in notebooks %}
+      <div class="card">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">{{ notebook.title }}</h3>
+            {% if notebook.description %}
+            <p class="text-sm text-gray-600 mt-1">{{ notebook.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+        
+        <div class="flex flex-wrap gap-2">
+          <a href="{% url 'notebook-detail' notebook.id %}" 
+             class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+            👁️ Просмотр
+          </a>
+          
+          {% if notebook.get_binder_url %}
+          <a href="/" 
+             class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm font-medium">
+            🚀 Запустить
+          </a>
+          {% endif %}
+          
+          <a href="{{ notebook.file.url }}" download
+             class="px-4 py-2 bg-gray-100 rounded-lg text-gray-800 hover:bg-gray-200 transition-colors text-sm font-medium">
+            📥 Скачать .ipynb
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if object.notebook_link or object.test_link %}
+  <div class="flex flex-col gap-4 mb-8">
     {% if object.notebook_link %}
       <a href="{{ object.notebook_link }}" target="_blank"
          class="px-4 py-2 bg-gray-100 rounded-lg text-gray-800 hover:bg-gray-200 transition-colors">
-         Открыть ноутбук
+         Открыть ноутбук (внешняя ссылка)
       </a>
     {% endif %}
 
@@ -26,8 +66,8 @@
       </a>
     {% endif %}
   </div>
+  {% endif %}
 
-  <!-- Требуется email -->
   {% if object.requires_email %}
     <p class="mt-6 text-sm text-gray-500">
       Для доступа к этому уроку требуется войти через email.
@@ -35,7 +75,6 @@
     <div id="hx-login" hx-get="/hx/login/" hx-trigger="load" hx-target="#hx-login" hx-swap="outerHTML"></div>
   {% endif %}
 
-  <!-- Дата урока -->
   <p class="mt-6 text-xs text-gray-400">
     Добавлено: {{ object.timestamp|date:"d M Y" }}, обновлено: {{ object.updated|date:"d M Y" }}
   </p>

@@ -32,6 +32,16 @@ urlpatterns = [
         name="lesson-detail",
     ),
     
+    path(
+        "notebook/<int:notebook_id>/",
+        courses_views.notebook_detail_view,
+        name="notebook-detail",
+    ),
+    path(
+        "notebook/<int:notebook_id>/interactive/",
+        courses_views.notebook_interactive_view,
+        name="notebook-interactive",
+    ),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Интерактивный режим — {{ notebook.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto py-10 px-4 text-lg leading-relaxed">
+
+  <!-- Назад -->
+  <div class="mb-10">
+    <a href="{% url 'notebook-detail' notebook.id %}"
+       class="text-blue-600 hover:text-blue-800 text-xl">
+      ← Назад к просмотру
+    </a>
+  </div>
+
+  <!-- Заголовок -->
+  <div class="text-center mb-14">
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">🚀 Интерактивный режим</h1>
+    <p class="text-2xl text-gray-600">{{ notebook.title }}</p>
+  </div>
+
+  <!-- Блок Binder -->
+  <div class="max-w-2xl mx-auto mb-14">
+
+    {% if binder_url %}
+
+    <div class="card p-8 shadow-md hover:shadow-lg transition-all rounded-2xl">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-4xl">
+          🚀
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold text-gray-900">Binder</h3>
+          <p class="text-lg text-gray-500">Бесплатно, в браузере</p>
+        </div>
+      </div>
+
+      <p class="text-gray-600 text-xl mb-6 leading-relaxed">
+        Binder создаёт полноценное окружение Jupyter прямо в браузере.  
+        Первый запуск может занять 2–3 минуты.
+      </p>
+
+      <a href="{{ binder_url }}" target="_blank"
+         class="block w-full px-6 py-4 bg-orange-500 text-white text-center rounded-xl 
+                hover:bg-orange-600 transition-all text-xl font-semibold">
+        Открыть в Binder
+      </a>
+
+      <div class="mt-4 flex items-center gap-3 text-lg text-gray-500">
+        <span>⏱️ 2–3 минуты</span>
+        <span>•</span>
+        <span>💾 Сессия временная</span>
+      </div>
+    </div>
+
+    {% else %}
+
+    <div class="card p-10 text-center">
+      <div class="text-6xl mb-6">⚠️</div>
+      <h3 class="text-3xl font-semibold text-gray-900 mb-4">Интерактивный режим недоступен</h3>
+
+      <p class="text-gray-600 text-xl mb-6">
+        Чтобы включить интерактивный режим, укажите GitHub-репозиторий в настройках ноутбука.
+      </p>
+
+      <a href="{{ notebook.file.url }}" download
+         class="inline-block px-8 py-4 bg-gray-700 text-white rounded-xl hover:bg-gray-800 
+                transition-all text-xl font-medium">
+        📥 Скачать .ipynb
+      </a>
+    </div>
+
+    {% endif %}
+  </div>
+
+  <!-- Инструкция -->
+  <div class="mt-10 p-8 bg-blue-50 rounded-2xl max-w-3xl mx-auto text-xl">
+    <h3 class="font-semibold text-2xl text-gray-900 mb-4">📚 Как использовать</h3>
+
+    <ul class="space-y-3">
+      <li class="flex gap-3">
+        <span class="text-blue-600 font-bold">1.</span>
+        <span>Выберите платформу: Binder или Colab.</span>
+      </li>
+
+      <li class="flex gap-3">
+        <span class="text-blue-600 font-bold">2.</span>
+        <span>Подождите загрузку окружения (Binder может грузиться долго).</span>
+      </li>
+
+      <li class="flex gap-3">
+        <span class="text-blue-600 font-bold">3.</span>
+        <span>Запускайте ячейки кнопкой <b>Run</b> или <b>Shift+Enter</b>.</span>
+      </li>
+
+      <li class="flex gap-3">
+        <span class="text-blue-600 font-bold">4.</span>
+        <span>Изменяйте код — все изменения временные.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Скачивание -->
+  <div class="mt-12 text-center">
+    <p class="text-xl text-gray-500 mb-5">Хотите работать локально?</p>
+
+    <div class="flex justify-center gap-4">
+      <a href="{{ notebook.file.url }}" download
+         class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 
+                transition-all text-xl">
+        📥 Скачать файл
+      </a>
+
+      <a href="{% url 'notebook-detail' notebook.id %}"
+         class="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 
+                transition-all text-xl">
+        👁️ Просмотр
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

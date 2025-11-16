@@ -106,3 +106,62 @@ class Lesson(models.Model):
     @property
     def requires_email(self):
         return self.course.access == AccessRequirement.EMAIL_REQUIRED
+
+
+class Notebook(models.Model):
+    lesson = models.ForeignKey(
+        Lesson, 
+        on_delete=models.CASCADE, 
+        related_name='notebooks',
+        help_text="Урок, к которому привязан ноутбук"
+    )
+    title = models.CharField(
+        max_length=200, 
+        verbose_name="Название ноутбука"
+    )
+    description = models.TextField(
+        blank=True, 
+        verbose_name="Описание"
+    )
+    file = models.FileField(
+        upload_to='notebooks/', 
+        verbose_name="Jupyter Notebook файл (.ipynb)",
+        help_text="Загрузите .ipynb файл"
+    )
+    github_repo = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        verbose_name="GitHub репозиторий",
+        help_text="Например: username/repo-name (для Binder)"
+    )
+    github_branch = models.CharField(
+        max_length=100,
+        default="main",
+        verbose_name="Ветка GitHub",
+        help_text="Обычно main или master"
+    )
+    order = models.IntegerField(
+        default=0, 
+        verbose_name="Порядок отображения"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['order', 'created_at']
+        verbose_name = "Jupyter Notebook"
+        verbose_name_plural = "Jupyter Notebooks"
+    
+    def __str__(self):
+        return f"{self.title} ({self.lesson.title})"
+    
+    def get_binder_url(self):
+        """Генерирует URL для Binder (интерактивный запуск)"""
+        if self.github_repo:
+            filepath = self.file.name.replace('notebooks/', '')
+            return f"https://mybinder.org/v2/gh/{self.github_repo}/{self.github_branch}?filepath={filepath}"
+        return None
+    
+    def get_absolute_url(self):
+        return reverse("notebook-detail", kwargs={"notebook_id": self.id})
