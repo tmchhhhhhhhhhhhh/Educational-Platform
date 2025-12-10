@@ -79,10 +79,11 @@
 | ![Django REST](https://img.shields.io/badge/DRF-092E20?style=flat-square&logo=django&logoColor=white) | ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | - | ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white) |
 
 </div>
+
 ## Скриншоты сайта
 
 <p align="center">
-  <img src="assets/[spl1.png](https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl1.png?raw=true)" alt="Скриншот 1" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl1.png?raw=true" alt="Скриншот 1" />
 </p>
 
 <p align="center">
