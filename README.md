@@ -82,35 +82,35 @@
 
 ##Скриншоты сайта
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-13-46.png" alt="Скриншот 1">
+  <img src="assets/spl1.png" alt="Скриншот 1">
 </p>
 
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-17-21.png" alt="Скриншот 2">
+  <img src="assets/spl2.png" alt="Скриншот 2">
 </p>
 
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-18-49.png" alt="Скриншот 3">
+  <img src="assets/spl3.png" alt="Скриншот 3">
 </p>
 
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-20-17.png" alt="Скриншот 1">
+  <img src="assets/spl4.png" alt="Скриншот 1">
 </p>
 
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-20-45.png" alt="Скриншот 2">
+  <img src="assets/spl5.png" alt="Скриншот 2">
 </p>
 
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-20-55.png" alt="Скриншот 3">
+  <img src="assets/spl6.png" alt="Скриншот 3">
 </p>
 
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-26-33.png" alt="Скриншот 1">
+  <img src="assets/spl7.png" alt="Скриншот 1">
 </p>
 
 <p align="center">
-  <img src="assets/Снимок экрана от 2025-12-10 12-32-14.png" alt="Скриншот 2">
+  <img src="assets/spl8.png" alt="Скриншот 2">
 </p>
 
 
