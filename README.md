@@ -79,38 +79,38 @@
 | ![Django REST](https://img.shields.io/badge/DRF-092E20?style=flat-square&logo=django&logoColor=white) | ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | - | ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white) |
 
 </div>
+## Скриншоты сайта
 
-##Скриншоты сайта
 <p align="center">
-  <img src="assets/spl1.png" alt="Скриншот 1">
+  <img src="assets/spl1.png" alt="Скриншот 1" />
 </p>
 
 <p align="center">
-  <img src="assets/spl2.png" alt="Скриншот 2">
+  <img src="assets/spl2.png" alt="Скриншот 2" />
 </p>
 
 <p align="center">
-  <img src="assets/spl3.png" alt="Скриншот 3">
+  <img src="assets/spl3.png" alt="Скриншот 3" />
 </p>
 
 <p align="center">
-  <img src="assets/spl4.png" alt="Скриншот 1">
+  <img src="assets/spl4.png" alt="Скриншот 4" />
 </p>
 
 <p align="center">
-  <img src="assets/spl5.png" alt="Скриншот 2">
+  <img src="assets/spl5.png" alt="Скриншот 5" />
 </p>
 
 <p align="center">
-  <img src="assets/spl6.png" alt="Скриншот 3">
+  <img src="assets/spl6.png" alt="Скриншот 6" />
 </p>
 
 <p align="center">
-  <img src="assets/spl7.png" alt="Скриншот 1">
+  <img src="assets/spl7.png" alt="Скриншот 7" />
 </p>
 
 <p align="center">
-  <img src="assets/spl8.png" alt="Скриншот 2">
+  <img src="assets/spl8.png" alt="Скриншот 8" />
 </p>
 
 
