@@ -82,34 +82,42 @@
 
 ## Скриншоты сайта
 
+Главная страница
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl1.png?raw=true" alt="Скриншот 1" />
 </p>
 
+Подтверждение почты
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl2.png?raw=true" alt="Скриншот 2" />
 </p>
 
+Страница курсов
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl3.png?raw=true" alt="Скриншот 3" />
 </p>
 
+Первый урок
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl4.png?raw=true" alt="Скриншот 4" />
 </p>
 
+Ноутбук урока в режиме просмотра
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl5.png?raw=true" alt="Скриншот 5" />
 </p>
 
+еще немножко урока
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl6.png?raw=true" alt="Скриншот 6" />
 </p>
 
+Ноутбук урока в Binder
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl7.png?raw=true" alt="Скриншот 7" />
 </p>
 
+Завершение времени сессии
 <p align="center">
   <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl8.png?raw=true" alt="Скриншот 8" />
 </p>
