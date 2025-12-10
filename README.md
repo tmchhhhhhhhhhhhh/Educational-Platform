@@ -86,31 +86,31 @@
 </p>
 
 <p align="center">
-  <img src="assets/spl2.png" alt="Скриншот 2" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl2.png" alt="Скриншот 2" />
 </p>
 
 <p align="center">
-  <img src="assets/spl3.png" alt="Скриншот 3" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl3.png" alt="Скриншот 3" />
 </p>
 
 <p align="center">
-  <img src="assets/spl4.png" alt="Скриншот 4" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl4.png" alt="Скриншот 4" />
 </p>
 
 <p align="center">
-  <img src="assets/spl5.png" alt="Скриншот 5" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl5.png" alt="Скриншот 5" />
 </p>
 
 <p align="center">
-  <img src="assets/spl6.png" alt="Скриншот 6" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl6.png" alt="Скриншот 6" />
 </p>
 
 <p align="center">
-  <img src="assets/spl7.png" alt="Скриншот 7" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl7.png" alt="Скриншот 7" />
 </p>
 
 <p align="center">
-  <img src="assets/spl8.png" alt="Скриншот 8" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl8.png" alt="Скриншот 8" />
 </p>
 
 
