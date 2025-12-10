@@ -82,35 +82,35 @@
 ## Скриншоты сайта
 
 <p align="center">
-  <img src="assets/[spl1.png](https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl1.png?raw=true)" alt="Скриншот 1" />
+  <img src="assets/[spl1.png](https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl1.png?raw=true)" alt="Скриншот 1" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl2.png?raw=true" alt="Скриншот 2" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl2.png?raw=true" alt="Скриншот 2" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl3.png?raw=true" alt="Скриншот 3" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl3.png?raw=true" alt="Скриншот 3" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl4.png?raw=true" alt="Скриншот 4" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl4.png?raw=true" alt="Скриншот 4" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl5.png?raw=true" alt="Скриншот 5" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl5.png?raw=true" alt="Скриншот 5" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl6.png?raw=true" alt="Скриншот 6" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl6.png?raw=true" alt="Скриншот 6" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl7.png?raw=true" alt="Скриншот 7" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl7.png?raw=true" alt="Скриншот 7" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/assets/spl8.png?raw=true" alt="Скриншот 8" />
+  <img src="https://github.com/tmchhhhhhhhhhhhh/assets/blob/main/spl8.png?raw=true" alt="Скриншот 8" />
 </p>
 
 
